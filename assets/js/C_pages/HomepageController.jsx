@@ -4,13 +4,18 @@ var HomepageController = React.createClass({
   displayName: 'Homepage controller',
 
   getInitialState: function() {
-    return {};
+    return {lang: ""};
   },
 
   componentDidMount: function() {},
 
+  onLanguageChange(data) {
+    console.log("Calling HomepageController.onLanguageChange with data = " + data);
+    this.setState({lang: data});
+  },
+
   render: function() {
-    return <Homepage/>;
+    return <Homepage lang={this.state.lang} onLanguageChange={this.onLanguageChange}/>;
   }
 });
 

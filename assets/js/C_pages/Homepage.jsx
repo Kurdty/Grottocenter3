@@ -10,7 +10,7 @@ var HomepageHeader = React.createClass({
         <div className="container-fluid">
           <div className="row toolbar">
             <div className="col-xs-4">
-              <LanguagePicker/>
+              <LanguagePicker onLanguageChange={this.props.onLanguageChange}/>
             </div>
 
             <div className="col-xs-8">
@@ -25,7 +25,7 @@ var HomepageHeader = React.createClass({
               </a>
               <h1 className="sitename">Grottocenter</h1>
               <span className="slogan">
-                <I18n label="The Wiki database made by cavers for cavers."/>
+                <I18n lang={this.props.lang} label="The Wiki database made by cavers for cavers."/>
               </span>
             </div>
           </div>
@@ -167,7 +167,7 @@ var Homepage = React.createClass({
   render: function() {
     return (
       <div>
-        <HomepageHeader/>
+        <HomepageHeader lang={this.props.lang} onLanguageChange={this.props.onLanguageChange}/>
         <HomepageNav/>
         <HomepageAside/>
         <HomepageArticles/>

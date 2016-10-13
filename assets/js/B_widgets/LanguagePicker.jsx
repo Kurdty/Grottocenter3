@@ -1,21 +1,26 @@
 "use strict";
 
 var LanguagePickerEntry = React.createClass({
+
+  changeLanguage: function(lang) {
+    this.props.onLanguageChange(lang);
+  },
+
   render: function() {
     var flagUrl = "/images/flags/" + this.props.data.flag;
     //TODO alt text
     var lang = "?lang=" + this.props.data.lang;
     return (
       <li>
-        <a href={lang}><img src={flagUrl} alt=""/><I18n label={this.props.data.name}/></a>
+        <a href="#" data-lang={lang} onClick={this.changeLanguage.bind(this, this.props.data.lang)}><img src={flagUrl} alt=""/><I18n label={this.props.data.name}/></a>
       </li>
     );
   }
 });
 
 var LanguagePicker = React.createClass({
-  render: function() {
 
+  render: function() {
     // TODO To be dynamised with controler + db table
     var data = [
       {
@@ -38,9 +43,10 @@ var LanguagePicker = React.createClass({
     ];
 
     var liRows = [];
+    var _this = this;
     data.forEach(function(country) {
       var key = "lanpe-" + country.lang;
-      liRows.push(<LanguagePickerEntry data={country} key={key}/>);
+      liRows.push(<LanguagePickerEntry data={country} key={key} onLanguageChange={_this.props.onLanguageChange}/>);
     });
 
     return (
