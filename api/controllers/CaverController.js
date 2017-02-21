@@ -92,5 +92,14 @@ module.exports = {
       params.notFoundMessage = 'No cavers found.';
       return ControllerService.treat(err, found, params, res);
     });
-  }
+  },
+
+  getRights: function(req, res) {
+    TCaver.findOne({id: req.params.id}, {select: 'dateInscription'}).populate('groups').populate('rights').exec(function(err, found) {
+      let params = {};
+      params.controllerMethod = 'CaverController.getRights';
+      params.notFoundMessage = 'Caver of id ' + req.params.id + ' not found.';
+      return ControllerService.treat(err, found, params, res);
+    });
+  },
 };

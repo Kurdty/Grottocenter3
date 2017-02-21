@@ -28,14 +28,14 @@ module.exports = {
     const password = req.param('password');
 
     if (!contact || !password) {
-      return res.forbidden(res.i18n('BAD_CREDENTIAL'));
+      return res.forbidden(res.i18n('--BAD_CREDENTIAL'));
     }
 
     TCaver.findOne({
       contact: contact
     }, function(err, account) {
       if (!account) {
-        return res.forbidden('Bad credentials.');
+        return res.forbidden('-Bad credentials.');
       }
 
       TCaver.comparePassword(password, account, function(err, valid) {
@@ -43,11 +43,16 @@ module.exports = {
           return res.forbidden('Bad credentials.');
         }
 
+        // Get user rights
+        console.log("Groups ", account.groups);
+
         req.session.authenticated = true;
         res.json({
           user: account,
           token: TokenAuthService.issue({
-            id: account.id
+            id: account.id,
+            username: account.nickname,
+            role: account.groups
           })
         });
       });

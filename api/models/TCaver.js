@@ -241,6 +241,12 @@ module.exports = {
       columnName: 'Picture_file_name'
     },
 
+    groups: {
+      collection: 'TGroup',
+      via: 'idCaver',
+      through: 'jcavergroup'
+    },
+
     toJSON: function() {
       let obj = this.toObject();
       delete obj.password; // Removing password on JSON object
@@ -256,7 +262,6 @@ module.exports = {
 
   comparePassword: function(password, user, next) {
     const hash = crypto.createHash('md5').update(password).digest('hex');
-
     if (hash === user.password) {
       next(null, true);
     } else {

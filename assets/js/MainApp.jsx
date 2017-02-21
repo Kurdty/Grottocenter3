@@ -10,7 +10,6 @@ import LightPage from './pages/LightPage';
 import StandardPage from './pages/StandardPage';
 import HomepageFlat from './pages/HomepageFlat';
 import Faq from './components/Faq';
-import SigninForm from './components/SigninForm';
 import SignupForm from './components/SignupForm';
 
 import grottoTheme from './grottoTheme';
@@ -19,19 +18,22 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 import {Provider} from 'react-redux';
 import {createStore} from 'redux';
-import {searchReducers} from './reducers/SearchReducers';
+import {GcReducers} from './reducers/GcReducers';
 
 // Needed for onTouchTap// sans ça les clicks de material-ui ne fonctionnent pas
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
 injectTapEventPlugin();
 
-let gcStore = createStore(searchReducers);
+let gcStore = createStore(GcReducers);
 
-/*
-  * please do not remove *
-  localization init via ejs printed global var catalog
-*/
+// TODO to be removed before production
+let unsubscribe = gcStore.subscribe(() =>  //eslint-disable-line
+  console.log('New state: ', gcStore.getState()) //eslint-disable-line
+);
+
+// Please do not remove
+// localization init via ejs printed global var catalog
 I18n.locale = window.catalog;
 
 ReactDOM.render(
@@ -39,7 +41,6 @@ ReactDOM.render(
     <Provider store={gcStore}>
       <Router history={browserHistory}>
         <Route path="/auth/" component={LightPage}>
-          <Route path="/auth/signin" component={SigninForm}/>
           <Route path="/auth/signup" component={SignupForm}/>
         </Route>
 

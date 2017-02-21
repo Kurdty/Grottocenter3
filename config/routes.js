@@ -89,6 +89,11 @@ module.exports.routes = {
     action: 'findAll'
   },
 
+  'GET /caver/getRights/:id': {
+    controller: 'Caver',
+    action: 'getRights'
+  },
+
   'GET /search/findAll': {
     controller: 'Search',
     action: 'findAll'
