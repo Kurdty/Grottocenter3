@@ -9,16 +9,15 @@ import {showMarker} from './../actions/Search';
 export const marker = (state = [], action) => {
   switch (action.type) {
     case showMarker().type:// TODO useless mapping > send plain entry object to Map
-    return {
-          id:action.entry.id,
-          latlng:{
-              lat:action.entry.latitude,
-              lng:action.entry.longitude
-          },
-          text:action.entry.text,
-          altitude:action.entry.altitude?action.entry.altitude + 'm':'',
-          author:action.entry.author.nickname?action.entry.author.nickname:''
-    }
+      return {
+        latlng:{
+          lat:action.entry.latitude,
+          lng:action.entry.longitude
+        },
+        text:action.entry.text,
+        altitude:action.entry.altitude?action.entry.altitude + 'm':'',
+        author:action.entry.author.nickname?action.entry.author.nickname:''
+      };
     default://TODO no default marker on map
       return state;
   }
