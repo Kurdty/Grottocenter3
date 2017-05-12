@@ -27,13 +27,21 @@ module.exports = {
     // end search for caves
     //});
   },
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/feature/map
   findByBounds: function(req, res) {
     // https://github.com/balderdashy/waterline-docs/blob/master/queries/query-language.md
     TEntry.find({
         latitude: {
           '>': req.param('sw_lat'),
+<<<<<<< HEAD
           '<': req.param('ne_lat'),
           '!': 0 // TODO: why never empty ? remove default element
+=======
+          '<': req.param('ne_lat')
+>>>>>>> origin/feature/map
         },
         longitude: {
           '>': req.param('sw_lng'),
