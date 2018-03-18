@@ -14,6 +14,10 @@ import SignupForm from '../components/SignupForm';
 import AvailableTools, {EntriesOfInterest} from '../components/admin/Tools';
 import Api from '../components/appli/Api';
 import LatestBlogNewsSection from '../components/homepage/LatestBlogNewsSection';
+import Entries from '../components/appli/entries/Index';
+import EntryDetails from '../components/appli/entries/Details';
+import EntrySearch from '../components/appli/entries/Search';
+import EntryAdd from '../components/appli/entries/Add';
 
 export default (
   <Route>
@@ -32,6 +36,11 @@ export default (
           <Route path="signin" component={SigninForm}/>
           <Route path="signup" component={SignupForm}/>
           <Redirect from="*" to="/"/>
+        </Route>
+        <Route path="/**/entries" component={Entries}>
+          <Route path="add" component={EntryAdd}/>
+          <Route path="search" component={EntrySearch}/>
+          <Route path=":id" component={EntryDetails}/>
         </Route>
         <Route path="faq" component={Faq}/>
         <Route path="map(/:target)" component={MapContainer}/>
