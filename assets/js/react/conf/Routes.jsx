@@ -38,6 +38,7 @@ export default (
           <Redirect from="*" to="/"/>
         </Route>
         <Route path="/**/entries" component={Entries}>
+          <IndexRoute component={EntrySearch}/>
           <Route path="add" component={EntryAdd}/>
           <Route path="search" component={EntrySearch}/>
           <Route path=":id" component={EntryDetails}/>
