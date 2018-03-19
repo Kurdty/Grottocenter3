@@ -241,6 +241,12 @@ module.exports = {
       columnName: 'Picture_file_name'
     },
 
+    groups: {
+      collection: 'TGroup',
+      via: 'idCaver',
+      through: 'jcavergroup'
+    },
+
     toJSON: function() {
       let obj = this.toObject();
       delete obj.password; // Removing password on JSON object

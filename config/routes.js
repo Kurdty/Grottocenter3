@@ -105,6 +105,11 @@ module.exports.routes = {
     }
   },
 
+  'GET /caver/getRights/:id': {
+    controller: 'Caver',
+    action: 'getRights'
+  },
+
   'GET /api/caver/count': {
     controller: 'Caver',
     action: 'getCaversNumber'

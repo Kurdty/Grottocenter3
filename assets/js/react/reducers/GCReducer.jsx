@@ -7,8 +7,10 @@ import {dynamicNumber} from './DynamicNumberReducer';
 import {sideMenu} from './SideMenuReducer';
 import {randomEntry} from './RandomEntryReducer';
 import {partnersCarousel} from './PartnersCarouselReducer';
+import {auth} from './AuthenticationReducer';
 
 const GCReducer = combineReducers({
+  auth,
   currentLanguage,
   quicksearch,
   map,

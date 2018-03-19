@@ -40,7 +40,8 @@ module.exports.policies = {
     '*': false,
     'getCaversNumber': true,
     'update': 'tokenAuth',
-    'destroy': 'tokenAuth'
+    'destroy': 'tokenAuth',
+    'getRights': true
   },
 
   EntryController: {
