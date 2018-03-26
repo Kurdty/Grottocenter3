@@ -19,6 +19,9 @@ import GCReducer from './reducers/GCReducer';
 import {changeLanguage} from './actions/Language';
 import TextDirectionProvider from './containers/TextDirectionProvider';
 
+import {processLogin, refreshToken} from './actions/Authentication';
+import {GUEST_LOGIN, GUEST_EMAIL} from './conf/Config';
+
 // Needed for onTouchTap// sans ça les clicks de material-ui ne fonctionnent pas
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
@@ -37,11 +40,20 @@ let gcStore = createStore(
 */
 I18n.locale = window.catalog;
 
-// gcStore.subscribe(function() {
-//   console.log(gcStore.getState());
-// });
+gcStore.subscribe(function() {
+  console.log(gcStore.getState());
+});
 
 gcStore.dispatch(changeLanguage(locale)); //eslint-disable-line no-undef
+
+// Local storage used to prevent user to be unlogged by F5
+if (!localStorage.getItem('token')) {
+  //TODO also add control token validity
+  gcStore.dispatch(processLogin(GUEST_LOGIN, GUEST_EMAIL));
+} else {
+  gcStore.dispatch(refreshToken());
+  //TODO if response is 401, show a message then process a guest login
+}
 
 ReactDOM.render(
   <MuiThemeProvider muiTheme={getMuiTheme(grottoTheme)}>

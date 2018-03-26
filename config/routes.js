@@ -53,10 +53,6 @@ module.exports.routes = {
 
   /* For ReactRouter routes */
 
-  'GET /auth/*': {
-    view: 'grottocenter'
-  },
-
   'GET /auth/signin': {
     view: 'grottocenter'
   },
@@ -73,6 +69,11 @@ module.exports.routes = {
   'POST /api/auth/login': {
     controller: 'Auth',
     action: 'login'
+  },
+
+  'GET /api/auth/refreshToken': {
+    controller: 'Auth',
+    action: 'refreshToken'
   },
 
   'GET /api/auth/logout': {

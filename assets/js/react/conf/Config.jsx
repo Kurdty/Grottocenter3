@@ -1,9 +1,12 @@
+
 import _ from 'underscore.string';
 
 export const
   DEFAULT_LANGUAGE = 'fr',
   FR_GC_BLOG = '/api/rss/FR',
-  EN_GC_BLOG = '/api/rss/EN';
+  EN_GC_BLOG = '/api/rss/EN',
+  GUEST_LOGIN = 'guest@grottocenter.com.noreply',
+  GUEST_EMAIL = 'password';
 
 function generateLinks(link, defaultLang) {
   let resultArray = {};
@@ -111,7 +114,9 @@ export const
   findRandomEntryUrl = '/api/entry/findRandom',
   findForCarouselUrl = '/api/partner/findForCarousel',
   quicksearchUrl = '/api/v1/search/findAll',
-  findMapBoundsUrl = '/api/v1/geoloc/findByBounds';
+  findMapBoundsUrl = '/api/v1/geoloc/findByBounds',
+  loginUrl = '/api/auth/login',
+  refreshTokenUrl = '/api/auth/refreshToken';
 
 export const
   swaggerLinkV1 = '/ui/swagger/?url=/swagger/apiV1.yaml';

@@ -94,5 +94,7 @@
 	"API": "API",
 	"To use them, you just need an {0} key, and few lines of code!": "Pour ce faire, une clé d'{0} et quelques lignes de code suffisent !",
 	"And to get your own API key, send us an email using the {0}": "Pour obtenir ta clé d'API, envoie-nous un email en passant par le {0}",
-	"contact form": "formulaire de contact"
+	"contact form": "formulaire de contact",
+	"Email": "Adresse email",
+	"Password": "Mot de passe"
 }

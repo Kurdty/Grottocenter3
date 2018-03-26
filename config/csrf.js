@@ -58,8 +58,8 @@
  *                                                                           *
  ****************************************************************************/
 
-module.exports.csrf = {
-  grantTokenViaAjax: true,
-  origin: '',
-  routesDisabled: '/ui/swagger/'
-};
+// module.exports.csrf = {
+//   grantTokenViaAjax: true,
+//   origin: '',
+//   routesDisabled: '/ui/swagger/'
+// };

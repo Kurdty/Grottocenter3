@@ -1,23 +1,28 @@
-import { START_LOGIN, LOGIN_SUCCESS, LOGIN_FAILED } from './../actions/Authentication';
+import {
+  START_LOGIN,
+  LOGIN_SUCCESS,
+  LOGIN_FAILED,
+  LOGOUT
+} from './../actions/Authentication';
 
 let defaultAuthenticationState = {
-  user: {
-    name: 'Guest',
-    lastLoginDate: ''
-  },
-  token: '',
-  roles: ['VIEW']
+  user: undefined,
+  token: undefined,
+  roles: []
 };
 
 export const auth = (state = defaultAuthenticationState, action) => {
   switch (action.type) {
     case START_LOGIN:
-      return state;
+    case LOGOUT:
+      return defaultAuthenticationState;
 
     case LOGIN_SUCCESS:
+      localStorage.setItem('token', action.loginInfos.token);
       return Object.assign({}, state, {
         token: action.loginInfos.token,
-        user: action.loginInfos.user
+        user: action.loginInfos.user,
+        roles: action.loginInfos.roles
       });
 
     case LOGIN_FAILED:

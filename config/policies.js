@@ -24,7 +24,13 @@ module.exports.policies = {
    *                                                                          *
    ***************************************************************************/
 
-  '*': false,
+  '*': [
+    // https://github.com/balderdashy/sails/pull/1224
+    // Initialize Passport
+    require('passport').initialize(),
+    // Use Passport's built-in sessions
+    //require('passport').session()
+  ],
 
   IndexController: {
     '*': false,
@@ -33,38 +39,39 @@ module.exports.policies = {
 
   AuthController: {
     'login': true,
-    'logout': 'tokenAuth'
+    'refreshToken': true,
+    'logout': 'authorize'
   },
 
   CaverController: {
     '*': false,
-    'getCaversNumber': true,
-    'update': 'tokenAuth',
-    'destroy': 'tokenAuth',
+    'getCaversNumber': 'authorize',
+    'update': 'authorize',
+    'destroy': 'authorize',
     'getRights': true
   },
 
   EntryController: {
-    '*': 'tokenAuth',
-    'find': 'apiKeyAuth',
+    '*': 'authorize',
+    'find': 'authorize',
     'findAll': true,
     'findRandom': true,
-    'getPublicEntriesNumber': 'apiKeyAuth',
-    'getEntriesNumber': true
+    'getPublicEntriesNumber' : 'authorize',
+    'getEntriesNumber' : 'authorize'
   },
 
   'v1/EntryController': {
     '*': false,
-    'find': 'apiKeyAuth',
-    'getPublicEntriesNumber': 'apiKeyAuth'
+    'find': 'authorize',
+    'getPublicEntriesNumber' : 'authorize',
   },
 
   SearchController: {
-    'findAll': 'apiKeyAuth'
+    'findAll': 'authorize',
   },
 
   'v1/SearchController': {
-    'findAll': 'apiKeyAuth',
+    'findAll': 'authorize',
   },
 
   CaveController: {
@@ -96,7 +103,7 @@ module.exports.policies = {
   },
 
   GrottoController: {
-    '*': true
+    '*': 'authorize'
   },
 
   AdminController: {

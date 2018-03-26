@@ -5,57 +5,101 @@
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
 'use strict';
-module.exports = {
-  /*login: function(req, res) {
-      passport.authenticate('local', function(err, user, info) {
-          if ((err) || (!user)) {
-              sails.log.error(err);
-              req.session.flash = {
-                  err: err
-              }
-              return res.redirect("/ui/login");
-          }
-          req.logIn(user, function(err) {
-              if (err) res.send(err);
-      req.session.authenticated = true;
-              return res.redirect("/");
-          });
-      })(req, res);
-  },*/
 
+const passport = require('passport');
+const _ = require('underscore.string');
+
+module.exports = {
   login: function(req, res) {
     const contact = req.param('contact');
     const password = req.param('password');
+
+    console.log("Log in with " + contact + " " + password)
 
     if (!contact || !password) {
       return res.forbidden(res.i18n('---BAD_CREDENTIAL'));
     }
 
-    TCaver.findOne({
-      contact: contact
-    }, function(err, account) {
-      if (!account) {
-        return res.forbidden('--Bad credentials.');
-      }
+    passport.authenticate('local', function(err, user, info) {
+      console.log("authenticate returned : ");
+      console.log(err);
+      console.log(user);
 
-      TCaver.comparePassword(password, account, function(err, valid) {
-        if (err || !valid) {
-          return res.forbidden('-Bad credentials.');
-        }
-
+      if (user) {
         // Get user rights
-        console.log("Groups ", account.groups);
+        console.log("Groups ", user.groups);
 
-        req.session.authenticated = true;
+        //req.session.authenticated = true;
         res.json({
-          user: account,
+          user: user,
           token: TokenAuthService.issue({
-            id: account.id,
-            username: account.nickname,
-            role: account.groups
+            id: user.id,
+            username: user.nickname,
+            role: user.groups
           })
         });
-      });
+      } else {
+        res.status(401);
+        res.send('Unauthorized');
+      }
+
+    })(req, res);
+
+    // TCaver.findOne({
+    //   contact: contact
+    // }, function(err, account) {
+    //   if (!account) {
+    //     return res.forbidden('--Bad credentials.');
+    //   }
+    //
+    //   TCaver.comparePassword(password, account, function(err, valid) {
+    //     if (err || !valid) {
+    //       return res.forbidden('-Bad credentials.');
+    //     }
+    //
+    //     // Get user rights
+    //     console.log("Groups ", account.groups);
+    //
+    //     req.session.authenticated = true;
+    //     res.json({
+    //       user: account,
+    //       token: TokenAuthService.issue({
+    //         id: account.id,
+    //         username: account.nickname,
+    //         role: account.groups
+    //       })
+    //     });
+    //   });
+    // });
+  },
+
+  refreshToken: function(req, res) {
+    const jwtToken = _.replaceAll(req.headers.authorization, 'Bearer ', '', true);
+    console.log("enter refreshToken " + jwtToken);
+    TokenAuthService.verify(jwtToken, function(error , result) {
+      console.log("refreshToken");
+      console.log(result);
+
+      if (result) {
+        // TODO refresh token expiration ??? if not rename to verfyToken
+        // TODO return user data
+
+        TCaver.findById(result.id, function(err, user) {
+          if (err) {
+            res.status(401);
+            res.send('Unauthorized');
+          } else {
+            res.status(200);
+            res.json({
+              user: user[0],
+              token: jwtToken
+            });
+          }
+        });
+      } else {
+        res.status(401);
+        res.send('Unauthorized');
+      }
     });
   },
 

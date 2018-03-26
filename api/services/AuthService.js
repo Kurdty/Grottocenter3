@@ -30,6 +30,7 @@ function getOldGCpassword(login, password) {
 
 function verifyPassword(user, password) {
   let hash = getOldGCpassword(user.Login, password);
+  console.log("hash = "+hash)
   return (user.password === password || user.password === hash);
 }
 
@@ -48,9 +49,12 @@ passport.use(new LocalStrategy(
     usernameField: 'contact'
   },
   function(username, password, done) {
+    console.log("passport.use")
+
     TCaver.findOne({
       contact: username
     }, function(err, user) {
+      console.log("user " + user)
       if (err) {
         return done(err);
       }

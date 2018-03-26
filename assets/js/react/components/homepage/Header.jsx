@@ -16,7 +16,7 @@ const HeaderGridContainer = styled(GridContainer)`
   background-size: 220%;
   background-position: top;
 
-  @media (min-width: @mdMin) {
+  @media (min-width: 550px) {
     background-size: 130%;
   }
 

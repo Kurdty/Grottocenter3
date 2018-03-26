@@ -1,5 +1,5 @@
-import fetch from 'isomorphic-fetch';
 import {dynamicNumbersUrl} from '../conf/Config';
+import {get} from '../conf/API';
 
 export const INIT_DYNNB_FETCHER = 'INIT_DYNNB_FETCHER';
 export const FETCH_DYNNB = 'FETCH_DYNNB';
@@ -42,17 +42,10 @@ export function loadDynamicNumber(numberType) {
     dispatch(initDynamicNumberFetcher(numberType));
     dispatch(fetchDynamicNumber(numberType));
 
-    let url = dynamicNumbersUrl[numberType];
-    return fetch(url)
-    .then((response) => {
-      if (response.status >= 400) {
-        throw new Error('Bad response from server'); // TODO Add better error management
-      }
-      return response.text();
-    })
-    .then(text => dispatch(fetchDynamicNumberSuccess(numberType, text)))
-    .catch(error => {
-      dispatch(fetchDynamicNumberFailure(numberType, error));
-    });
+    return get(dynamicNumbersUrl[numberType],
+      undefined,
+      (text) => dispatch(fetchDynamicNumberSuccess(numberType, text)),
+      (error) => dispatch(fetchDynamicNumberFailure(numberType, error))
+    );
   };
 }
