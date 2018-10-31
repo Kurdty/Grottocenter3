@@ -52,7 +52,8 @@ const btEyeCatcher = keyframes`
 `;
 
 const DonateFormWrapper = styled.div`
-  float: left;
+  text-align: right;
+  margin-top: 20px;
   animation: ${btEyeCatcher} 10s linear infinite;
 
   @media (max-width: 550px) {
@@ -82,7 +83,11 @@ const DonateButton = muiThemeable()(styled(FlatButton)`
   }
 
   span {
-     text-transform: none !important; // lesshint importantRule: false
+    width: 94px;
+    display: inline-block;
+    white-space: normal;
+    line-height: 14px;
+    text-transform: none !important; // lesshint importantRule: false
   }
 
   svg {

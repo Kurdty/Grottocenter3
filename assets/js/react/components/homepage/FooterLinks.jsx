@@ -23,32 +23,41 @@ const SocialLink = styled.div`
   }
 `;
 
+const LinkItem = styled.li`
+  margin-bottom: 5px;
+`;
+
 const SocialGCLink = muiThemeable()(SocialLink.withComponent(GCLink));
 
 const SocialIntlLink = muiThemeable()(SocialLink.withComponent(InternationalizedLink));
 
 const FooterLinks = () => (
   <FooterLinksList>
-    <li>
+    <LinkItem>
+      <SocialGCLink internal={true} href='/ui/map'>
+        <Translate>Access to map</Translate>
+      </SocialGCLink>
+    </LinkItem>
+    <LinkItem>
       <SocialGCLink internal={true} href='/ui/faq'>
         <Translate>FAQ</Translate>
       </SocialGCLink>
-    </li>
-    <li>
+    </LinkItem>
+    <LinkItem>
       <SocialIntlLink links={contributorsLink}>
         <Translate>Contributors</Translate>
       </SocialIntlLink>
-    </li>
-    <li>
+    </LinkItem>
+    <LinkItem>
       <SocialIntlLink links={contactLinks}>
         <Translate>Contact</Translate>
       </SocialIntlLink>
-    </li>
-    <li>
+    </LinkItem>
+    <LinkItem>
       <SocialIntlLink links={legalLinks}>
         <Translate>Legal notice</Translate>
       </SocialIntlLink>
-    </li>
+    </LinkItem>
   </FooterLinksList>
 );
 

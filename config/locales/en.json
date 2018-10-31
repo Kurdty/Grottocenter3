@@ -94,5 +94,6 @@
 	"API": "API",
 	"To use them, you just need an {0} key, and few lines of code!": "To use them, you just need an {0} key, and few lines of code!",
 	"And to get your own API key, send us an email using the {0}": "And to get your own API key, send us an email using the {0}",
-	"contact form": "contact form"
+	"contact form": "contact form",
+    "Access to map": "Access to map"
 }

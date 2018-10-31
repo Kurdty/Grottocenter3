@@ -1,13 +1,13 @@
 import React from 'react';
 import QuicksearchBar from './QuicksearchBar';
-import {GridContainer, GridRow, GridFullColumn} from '../common/Grid';
+import * as Grid from '../common/Grid';
 import {fseLinks} from '../../conf/Config';
 import InternationalizedLink from '../common/InternationalizedLink';
 import Translate from '../common/Translate';
 import styled from 'styled-components';
 import GCLogo from '../common/GCLogo';
 
-const HeaderGridContainer = styled(GridContainer)`
+const HeaderGridContainer = styled(Grid.GridContainer)`
   width: 100%;
   max-width: 100%;
   padding: 0;
@@ -25,7 +25,7 @@ const HeaderGridContainer = styled(GridContainer)`
   }
 `;
 
-const BrandRow = styled(GridRow)`
+const BrandRow = styled(Grid.GridRow)`
   padding: 40px 40px;
   text-align: center;
 `;
@@ -85,31 +85,46 @@ const Header = () => (
   <header className="header">
     <HeaderGridContainer>
       <BrandRow>
-        <GridFullColumn>
+        <Grid.GridFullColumn>
           <LogoImage />
           <Sitename>Grottocenter</Sitename>
           <Slogan>
               <Translate>The Wiki database made by cavers for cavers</Translate>
           </Slogan>
-        </GridFullColumn>
+        </Grid.GridFullColumn>
       </BrandRow>
 
-      <GridRow>
-        <GridFullColumn>
+      <Grid.GridRow>
+        <Grid.GridFullColumn>
           <FseInfos>
             <InternationalizedLink links={fseLinks}>
               <FseImage src="/images/FSE.svg" alt="Logo FSE" />
             </InternationalizedLink>
             <Translate>Grottocenter is supported by the FSE</Translate>
           </FseInfos>
-        </GridFullColumn>
-      </GridRow>
+        </Grid.GridFullColumn>
+      </Grid.GridRow>
 
-      <GridRow>
-        <GridFullColumn>
+      <Grid.GridRow>
+        <Grid.GridTwoThirdColumn>
           <QuicksearchBar />
-        </GridFullColumn>
-      </GridRow>
+        </Grid.GridTwoThirdColumn>
+        <Grid.GridOneThirdColumn>
+          OU Accéder directement à la carte <!doctype html>
+          <html lang="en">
+          <head>
+            <meta charset="UTF-8">
+              <meta name="viewport"
+                    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+                <meta http-equiv="X-UA-Compatible" content="ie=edge">
+                  <title>Document</title>
+          </head>
+          <body>
+          
+          </body>
+          </html>
+        </Grid.GridOneThirdColumn>
+      </Grid.GridRow>
     </HeaderGridContainer>
   </header>
 );
